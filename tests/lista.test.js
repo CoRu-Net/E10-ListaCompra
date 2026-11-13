@@ -21,7 +21,7 @@ describe('anadir', () => {
   });
   it('limita la fusión a 99 y rechaza cantidades inválidas', () => {
     const lista = anadir([], 'Arroz', 99);
-    expect(anadir(lista, 'arroz', 1)[0].cantidad).toBe(100);
+    expect(anadir(lista, 'arroz', 1)[0].cantidad).toBe(99);
     for (const n of [0, 100, 1.5]) expect(() => anadir([], 'x', n)).toThrow(RangeError);
   });
 });
