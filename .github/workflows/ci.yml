@@ -1,0 +1,28 @@
+name: Comprobaciones
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  comprobar:
+    name: Revisar proyecto
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v7
+      - name: Instalar Node.js 24
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Instalar dependencias
+        run: npm ci
+      - name: Revisar código con ESLint
+        run: npm run lint
+      - name: Comprobar formato con Prettier
+        run: npm run format:check
+      - name: Ejecutar tests
+        run: npm test
